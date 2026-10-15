@@ -62,7 +62,7 @@ function applyPrefs(theme, accent) {
   de.dataset.theme = resolveTheme(theme)
   applyAccent(de, accent, de.dataset.theme)
   const meta = document.querySelector('meta[name="theme-color"]')
-  if (meta) meta.content = de.dataset.theme === 'light' ? '#f2f2f7' : '#000000'
+  if (meta) meta.content = de.dataset.theme === 'dark' ? '#0D1722' : '#F7F9FC'
   if (MOBILE) setSystemBarsLight(de.dataset.theme === 'light')
 }
 
@@ -190,8 +190,9 @@ function Shell() {
   const authed = user || isGuest
   if (!ready && !authed) return (
     <div id="app">
-      <div style={{ paddingTop: '44vh', display: 'flex', justifyContent: 'center', fontSize: 34, color: 'var(--label-3)' }}>
-        <Icon name="dumbbell" />
+      <div style={{ paddingTop: '40vh', display: 'flex', flexDirection: 'column', alignItems: 'center', gap: 12 }}>
+        <img src="/logo.png" alt="Repkala" style={{ width: 64, height: 64, borderRadius: 16, boxShadow: '0 8px 24px rgba(254, 96, 8, 0.22)', objectFit: 'contain' }} />
+        <span style={{ fontSize: 18, fontWeight: 700, color: 'var(--label)', letterSpacing: '-.02em' }}>Repkala</span>
       </div>
     </div>
   )

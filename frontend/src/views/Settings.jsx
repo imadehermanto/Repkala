@@ -400,7 +400,7 @@ export default function Settings({ page = null, find = null, via = null }) {
   const layout = ['list', 'compact', 'focus'].includes(S.workoutView) ? S.workoutView : 'cards'
   const layoutLabel = { cards: t('Cards'), list: t('List'), compact: t('Compact') }[layout]
   const activeProfile = (S.equipProfiles || []).find(p => p.id === S.activeEquipId)
-  const themeLabel = { dark: t('Dark'), light: t('Light'), system: t('System') }[S.theme || 'dark'] || t('Dark')
+  const themeLabel = { light: t('Light'), dark: t('Dark'), system: t('System') }[S.theme || 'light'] || t('Light')
   // The value a root row shows, so most questions are answered without opening the page.
   const preview = {
     workout: () => (S.restSec > 0 ? t('{0} rest', fmtRest(S.restSec)) : t('No rest timer')) + ' · ' + layoutLabel,
@@ -714,11 +714,11 @@ export default function Settings({ page = null, find = null, via = null }) {
           <Segmented
             className="seg-inline"
             options={[
-              { value: 'dark', icon: 'moon', label: t('Dark') },
               { value: 'light', icon: 'sun', label: t('Light') },
+              { value: 'dark', icon: 'moon', label: t('Dark') },
               { value: 'system', icon: 'gear', label: t('System') },
             ]}
-            value={S.theme || 'dark'}
+            value={S.theme || 'light'}
             onChange={v => update(s => { s.theme = v })}
           />
         </Row>
@@ -824,17 +824,18 @@ export default function Settings({ page = null, find = null, via = null }) {
       {!MOBILE && !standalone() && <Section title={t('Tip')}>
         <Row icon="share" iconTint="var(--blue)"
           title={IS_ANDROID ? t('In Chrome: ⋮ menu → Add to Home screen') : t('In Safari: Share → Add to Home Screen')}
-          subtitle={t('to install openGym as a full-screen app.') + ' ' + (user ? t('Your data syncs with your profile. Sign in anywhere and it’s there.') : t('Guest data stays on this device, so export a backup now and then!'))} />
+          subtitle={t('to install Repkala as a full-screen app.') + ' ' + (user ? t('Your data syncs with your profile. Sign in anywhere and it’s there.') : t('Guest data stays on this device, so export a backup now and then!'))} />
       </Section>}
       {/* The version, where the support template tells people to look for it. On the phone
           build there is no address bar and no about box, so without this there is no way to tell
           which build you are running, or whether an update actually installed. */}
-      <div className="dim small sp-version">
-        openGym v{__APP_VERSION__} · {t('free & open source (AGPL v3)')}<br />
+      <div className="dim small sp-version" style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', gap: 6, textAlign: 'center' }}>
+        <img src="/logo.png" alt="Repkala" style={{ width: 48, height: 48, borderRadius: 12, margin: '8px auto 4px', boxShadow: '0 4px 12px rgba(254, 96, 8, 0.18)' }} />
+        <div><strong>Repkala</strong> v{__APP_VERSION__} · {t('free & open source (AGPL v3)')}</div>
         <a href="https://github.com/DuarteSantos8/openGym" target="_blank" rel="noopener">{t('Source code')}</a><br />
         {/* Attribution the media licence asks for word for word (agreement §8c), so it is not translated */}
         Exercise media © Aliaksandr Makatserchyk, <a href="https://gymvisual.com/" target="_blank" rel="noopener">Gym visual</a>, gymvisual.com.
-        Media licensed for use in openGym only; see <a href="https://github.com/DuarteSantos8/openGym/blob/main/NOTICE.md" target="_blank" rel="noopener">NOTICE.md</a>
+        Media licensed for use in Repkala; see <a href="https://github.com/DuarteSantos8/openGym/blob/main/NOTICE.md" target="_blank" rel="noopener">NOTICE.md</a>
       </div>
     </>,
 
@@ -962,7 +963,7 @@ function SettingsRoot({ ctx, preview, open, user, sync, home, go }) {
             value={preview[id]?.() || null} accessory="chevron" onClick={() => open(id)} className="sp-root-row" />)}
         </Section>
       ))}
-      <div className="dim small sp-version">openGym v{__APP_VERSION__}</div>
+      <div className="dim small sp-version">Repkala v{__APP_VERSION__}</div>
     </>}
   </div>
 }

@@ -1,52 +1,54 @@
 /* ============================================================================
-   openGym — design system
+   Repkala — design system
    ----------------------------------------------------------------------------
-   Rebuilt around four rules, each aimed at a specific "generated" tell in the
-   previous sheet:
-
-   1. ONE TYPE SCALE, MOSTLY REGULAR WEIGHT. The old sheet set font-weight 700/800
-      on nearly every element, which flattens hierarchy — when everything shouts,
-      position is the only cue left. Here weight carries meaning: 600 for a title,
-      400 for its content, and size does the rest.
-   2. A NEUTRAL SURFACE RAMP. Cards are near-neutral greys a few points apart, not
-      saturated blue-greys. Colour is spent only on the accent and on status.
-   3. HAIRLINES, NOT BORDERS. Separators are sub-pixel and inset past the icon
-      rail, so a list reads as one object instead of a stack of outlined boxes.
-   4. MOTION THAT ACKNOWLEDGES, NOT ANIMATES. Presses scale ~2%, transitions run
-      140–220ms on an ease-out curve. Nothing bounces or slides for decoration.
+   Brand Palette:
+     Deep Navy:      #152334 (Primary)
+     Vibrant Orange: #FE6008 (Accent)
+     Active Orange:  #FD4F10 (Highlight)
+     Cloud White:    #F7F9FC (Background)
+     Slate Gray:     #64748B (Secondary Text)
+     Soft Orange:    #FFF1E8 (Soft Highlight)
    ========================================================================== */
 
 /* ---------------------------------------------------------------- tokens -- */
 :root {
-  /* surfaces — dark is the default */
-  --bg:        #000000;
-  --bg-el:     #0e0e10;   /* elevated backdrop (sheets, bars) */
-  --surface:   #1c1c1e;   /* card / grouped-list fill */
-  --surface-2: #2c2c2e;   /* pressed + nested fill */
-  --surface-3: #3a3a3c;   /* controls (segmented track, switch off) */
+  /* Brand Tokens */
+  --brand-navy:          #152334;
+  --brand-orange:        #FE6008;
+  --brand-orange-active: #FD4F10;
+  --brand-bg:            #F7F9FC;
+  --brand-slate:         #64748B;
+  --brand-soft-orange:   #FFF1E8;
+
+  /* surfaces — Light is the default */
+  --bg:        #F7F9FC;
+  --bg-el:     #ffffff;   /* elevated backdrop (sheets, bars) */
+  --surface:   #ffffff;   /* card / grouped-list fill */
+  --surface-2: #F1F4F9;   /* pressed + nested fill */
+  --surface-3: #E2E8F0;   /* controls (segmented track, switch off) */
 
   /* text */
-  --label:     #ffffff;
-  --label-2:   rgba(235,235,245,.60);
-  --label-3:   rgba(235,235,245,.32);
-  --label-4:   rgba(235,235,245,.18);
+  --label:     #152334;   /* Deep Navy */
+  --label-2:   #64748B;   /* Slate Gray */
+  --label-3:   rgba(100, 116, 139, 0.60);
+  --label-4:   rgba(100, 116, 139, 0.30);
 
   /* lines */
-  --sep:       rgba(84,84,88,.60);
-  --sep-op:    rgba(84,84,88,.34);   /* for edges sitting over blur */
+  --sep:       rgba(100, 116, 139, 0.20);
+  --sep-op:    rgba(100, 116, 139, 0.12);   /* for edges sitting over blur */
   --hair:      .5px;
 
-  /* system palette (iOS dark values) */
-  --blue:#0a84ff; --green:#30d158; --red:#ff453a; --orange:#ff9f0a;
-  --yellow:#ffd60a; --teal:#40c8e0; --indigo:#5e5ce6; --pink:#ff375f;
-  --purple:#bf5af2; --mint:#63e6e2; --brown:#ac8e68; --grey:#8e8e93;
+  /* system palette */
+  --blue:#007aff; --green:#34c759; --red:#ff3b30; --orange:#FE6008;
+  --yellow:#ffcc00; --teal:#30b0c7; --indigo:#5856d6; --pink:#ff2d55;
+  --purple:#af52de; --mint:#00c7be; --brown:#a2845e; --grey:#64748B;
 
-  /* accent (per-account, synced) */
-  --acc:  var(--green);
-  --acc-2:#248a3d;
-  --on-acc:#000000;
-  --acc-soft: color-mix(in srgb, var(--acc) 16%, transparent);
-  --acc-line: color-mix(in srgb, var(--acc) 38%, transparent);
+  /* accent — Repkala Vibrant Orange default */
+  --acc:      #FE6008;
+  --acc-2:    #FD4F10;
+  --on-acc:   #ffffff;
+  --acc-soft: #FFF1E8;
+  --acc-line: rgba(254, 96, 8, 0.35);
 
   /* geometry */
   --r-sm:8px; --r:12px; --r-lg:16px; --r-xl:22px; --r-card:14px;
@@ -57,57 +59,78 @@
   --ease:cubic-bezier(.32,.72,0,1);
   --fast:140ms; --med:220ms;
 
-  /* The system bars the page is drawn under. env() is all a browser and the iOS app give; the
-     Android WebView reports only the camera cutout there, and on Android 15, which draws the app
-     under the status and navigation bars, the app passes the bars themselves as --native-sat and
-     --native-sab (MainActivity.java). The larger one wins, so a WebView that learns to report
-     the bars does not count them twice. */
   --sab:max(env(safe-area-inset-bottom,0px),var(--native-sab,0px));
   --sat:max(env(safe-area-inset-top,0px),var(--native-sat,0px));
-  /* height of the connection indicator under the status bar, 0 while there is none — set by
-     components/SyncBanner.jsx. Whatever starts at the top of the screen starts below it. */
   --conn:0px;
 }
 
 :root[data-theme="light"] {
-  --bg:        #f2f2f7;
-  --bg-el:     #f7f7fa;
+  --bg:        #F7F9FC;
+  --bg-el:     #ffffff;
   --surface:   #ffffff;
-  --surface-2: #ececef;
-  --surface-3: #e3e3e8;
+  --surface-2: #F1F4F9;
+  --surface-3: #E2E8F0;
 
-  --label:     #000000;
-  --label-2:   rgba(60,60,67,.60);
-  --label-3:   rgba(60,60,67,.30);
-  --label-4:   rgba(60,60,67,.16);
+  --label:     #152334;
+  --label-2:   #64748B;
+  --label-3:   rgba(100, 116, 139, 0.60);
+  --label-4:   rgba(100, 116, 139, 0.30);
 
-  --sep:       rgba(60,60,67,.29);
-  --sep-op:    rgba(60,60,67,.20);
+  --sep:       rgba(100, 116, 139, 0.20);
+  --sep-op:    rgba(100, 116, 139, 0.12);
 
-  --blue:#007aff; --green:#34c759; --red:#ff3b30; --orange:#ff9500;
+  --blue:#007aff; --green:#34c759; --red:#ff3b30; --orange:#FE6008;
   --yellow:#ffcc00; --teal:#30b0c7; --indigo:#5856d6; --pink:#ff2d55;
-  --purple:#af52de; --mint:#00c7be; --brown:#a2845e; --grey:#8e8e93;
-  --acc-2:#248a3d;
-  --on-acc:#ffffff;
+  --purple:#af52de; --mint:#00c7be; --brown:#a2845e; --grey:#64748B;
+
+  --acc:      #FE6008;
+  --acc-2:    #FD4F10;
+  --on-acc:   #ffffff;
+  --acc-soft: #FFF1E8;
+  --acc-line: rgba(254, 96, 8, 0.35);
 }
 
-/* accents — Apple's system colours, so a recolour never looks off-system */
+:root[data-theme="dark"] {
+  --bg:        #0D1722;
+  --bg-el:     #111E2E;
+  --surface:   #152334;
+  --surface-2: #1E3147;
+  --surface-3: #2A425F;
+
+  --label:     #F7F9FC;
+  --label-2:   #94A3B8;
+  --label-3:   rgba(148, 163, 184, 0.50);
+  --label-4:   rgba(148, 163, 184, 0.25);
+
+  --sep:       rgba(148, 163, 184, 0.20);
+  --sep-op:    rgba(148, 163, 184, 0.12);
+
+  --blue:#0a84ff; --green:#30d158; --red:#ff453a; --orange:#FE6008;
+  --yellow:#ffd60a; --teal:#40c8e0; --indigo:#5e5ce6; --pink:#ff375f;
+  --purple:#bf5af2; --mint:#63e6e2; --brown:#ac8e68; --grey:#94a3b8;
+
+  --acc:      #FE6008;
+  --acc-2:    #FD4F10;
+  --on-acc:   #ffffff;
+  --acc-soft: rgba(254, 96, 8, 0.20);
+  --acc-line: rgba(254, 96, 8, 0.40);
+}
+
+/* accents */
+:root[data-accent="orange"]{ --acc:#FE6008;       --acc-2:#FD4F10; --on-acc:#fff; --acc-soft:#FFF1E8 }
 :root[data-accent="lime"]  { --acc:var(--green);  --acc-2:#248a3d; --on-acc:#000 }
 :root[data-accent="sky"]   { --acc:var(--blue);   --acc-2:#0060df; --on-acc:#fff }
-:root[data-accent="orange"]{ --acc:var(--orange); --acc-2:#c76b00; --on-acc:#000 }
 :root[data-accent="violet"]{ --acc:var(--purple); --acc-2:#8944ab; --on-acc:#fff }
 :root[data-accent="pink"]  { --acc:var(--pink);   --acc-2:#d70036; --on-acc:#fff }
 :root[data-accent="red"]   { --acc:var(--red);    --acc-2:#d70015; --on-acc:#fff }
 :root[data-accent="teal"]  { --acc:var(--teal);   --acc-2:#0071a4; --on-acc:#000 }
 :root[data-accent="gold"]  { --acc:var(--yellow); --acc-2:#b25000; --on-acc:#000; --knob-ring:rgba(0,0,0,.28) }
-/* Label colour on a filled accent button is picked per accent by measured contrast,
-   not by taste. Button text is 17px/600, so the AA bar is 3:1 (large text). White on
-   the light-theme green is 2.22:1 and on teal 2.57:1 — both fail, and green is the
-   DEFAULT accent, so every primary button in light mode was failing. Black scores
-   9.46 / 8.16 there. Blue, purple, pink and red keep white (3.5–4.1:1), which both
-   passes and matches the platform convention. */
+
+:root[data-theme="dark"][data-accent="orange"] { --acc:#FE6008; --acc-2:#FD4F10; --on-acc:#fff; --acc-soft: rgba(254, 96, 8, 0.20); }
+
 :root[data-theme="light"][data-accent="lime"],
 :root[data-theme="light"][data-accent="teal"]  { --on-acc:#000 }
+:root[data-theme="light"][data-accent="orange"],
 :root[data-theme="light"][data-accent="sky"],
 :root[data-theme="light"][data-accent="violet"],
 :root[data-theme="light"][data-accent="pink"],
@@ -284,6 +307,8 @@ h4.sec{
 .card{
   background:var(--surface);border-radius:var(--r-card);
   padding:16px;margin-bottom:12px;
+  border:var(--hair) solid var(--sep-op);
+  box-shadow:0 1px 3px rgba(21,35,52,.04);
 }
 .card .big{font-size:30px;font-weight:600;letter-spacing:-.026em;line-height:1.1}
 
@@ -293,7 +318,11 @@ h4.sec{
   font-size:13px;font-weight:400;color:var(--label-2);
   letter-spacing:-.004em;padding:0 4px 7px;display:block;
 }
-.sect-b{background:var(--surface);border-radius:var(--r-card);overflow:hidden}
+.sect-b{
+  background:var(--surface);border-radius:var(--r-card);overflow:hidden;
+  border:var(--hair) solid var(--sep-op);
+  box-shadow:0 1px 3px rgba(21,35,52,.04);
+}
 .sect-f{font-size:13px;color:var(--label-2);padding:7px 4px 0;line-height:1.38}
 
 .lrow{
@@ -400,7 +429,8 @@ h4.sec{
   -webkit-backdrop-filter:saturate(180%) blur(10px);backdrop-filter:saturate(180%) blur(10px);
   border-top:var(--hair) solid var(--sep-op);
 }
-:root[data-theme="light"] #tabbar{background:rgba(249,249,251,.94)}
+:root[data-theme="light"] #tabbar{background:rgba(247,249,252,.94)}
+:root[data-theme="dark"] #tabbar{background:rgba(17,30,46,.94)}
 #tabbar button{
   flex:1;display:flex;flex-direction:column;align-items:center;gap:3px;
   color:var(--label-3);font-size:10px;font-weight:500;letter-spacing:.005em;padding-top:3px;
@@ -419,7 +449,7 @@ h4.sec{
 #tabbar .tab-ic{position:relative;display:inline-flex}
 .tab-dot{
   position:absolute;top:-1px;right:-3px;width:8px;height:8px;border-radius:50%;
-  background:var(--orange);box-shadow:0 0 0 2px var(--bg-el);pointer-events:none;
+  background:var(--acc-2);box-shadow:0 0 0 2px var(--bg-el);pointer-events:none;
 }
 .iconbtn .tab-dot{top:5px;right:5px;box-shadow:0 0 0 2px var(--bg)}
 #tabbar button.start{margin-top:-24px}
@@ -438,11 +468,11 @@ h4.sec{
    orange play glyph onto an orange disc. Both states restate their own colour.
    The disc is orange in either theme, so its glyph is black, not `--on-acc`. */
 #tabbar button.start .cir{color:var(--on-acc)}
-#tabbar button.start.rec .cir{background:var(--orange);color:#000;box-shadow:0 6px 18px -4px color-mix(in srgb,var(--orange) 55%,transparent)}
-#tabbar button.start.rec span{color:var(--orange)}
+#tabbar button.start.rec .cir{background:var(--acc-2);color:#fff;box-shadow:0 6px 18px -4px color-mix(in srgb,var(--acc-2) 55%,transparent)}
+#tabbar button.start.rec span{color:var(--acc-2)}
 #tabbar button.start.rec .cir::after{
   content:'';position:absolute;inset:0;border-radius:50%;
-  border:2px solid var(--orange);animation:ping 1.9s var(--ease) infinite;
+  border:2px solid var(--acc-2);animation:ping 1.9s var(--ease) infinite;
 }
 @keyframes ping{0%{transform:scale(1);opacity:.7}100%{transform:scale(1.45);opacity:0}}
 

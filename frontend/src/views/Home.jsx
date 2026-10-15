@@ -102,7 +102,13 @@ export default function Home() {
 
   return <div className="narrow">
     <div className="hdr">
-      <div><h1>{user ? t('Hi {0}', user.name) : 'openGym'}</h1><div className="sub">{today.toLocaleDateString(dateLocale(), { weekday: 'long', day: 'numeric', month: 'long' })}</div></div>
+      <div style={{ display: 'flex', alignItems: 'center', gap: 12 }}>
+        <img src="/logo.png" alt="Repkala" style={{ width: 42, height: 42, borderRadius: 11, flexShrink: 0, boxShadow: '0 2px 10px rgba(254, 96, 8, 0.16)', objectFit: 'contain' }} />
+        <div>
+          <h1>{user ? t('Hi {0}', user.name) : 'Repkala'}</h1>
+          <div className="sub">{today.toLocaleDateString(dateLocale(), { weekday: 'long', day: 'numeric', month: 'long' })}</div>
+        </div>
+      </div>
       <button className="iconbtn" onClick={() => nav('/settings')} aria-label={trouble ? t('Settings') + ', ' + t('Connection problem') : t('Settings')}><Icon name="gear" />{trouble && <span className="tab-dot" aria-hidden="true" />}</button>
     </div>
 
